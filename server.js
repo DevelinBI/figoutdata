@@ -1,6 +1,6 @@
-'use strict';
-const express = require('express');
-const app = express();
+
+var express = require('express');
+var app = express();
 
 var port = process.env.port || 3000;
 
@@ -11,18 +11,19 @@ var path = require('path');
 
 
 //---------------  set the server to listen
-app.use(express.static(path.join(__dirname, 'public')));
+//app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '')));
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());  
 
-var publicDir = path.join(__dirname, 'public'); 
+//var publicDir = path.join(__dirname, 'public'); 
 
 //var responses = require("./router.js");
 //app.use('/', responses);
 
 app.listen(port, (err) => {
   if (err) {
-    return console.log('something bad happened', err)
+    return console.log('something bad happened', err);
   }
 
   console.log(`server is listening on ${port}`);
