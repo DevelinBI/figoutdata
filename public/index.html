@@ -1,0 +1,66 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Header</title>   
+	<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+	<script src="https://d3js.org/d3.v4.min.js"></script>
+	<script src="../js/d3dataLoad.js"></script>
+	<link rel='stylesheet' type='text/css' href='../css/searchstyle.css'>
+</head>
+<body>
+<div class='container'>
+
+	<div class='banner-row'>
+		<h1>Data source control</h1>
+	</div>
+
+	<div class = 'container-datasources'>
+		<div class = 'new-sources'>
+			<h2>Please enter search terms.</h2>
+			<form>				
+				<div class='input'>
+					<p class='input-label'>Data source API</p>
+					<input type="text" id="apiStr1" name="apiStr1">
+				</div>
+			</form> 
+			<button class='btn-search' onclick='importData()'>Import</button>
+		</div>
+		<div id='sources' class = 'sources'>
+
+
+
+		</div>
+	</div>	
+</div>
+</body>
+</html>
+
+
+
+
+
+
+<script>
+function importData() {
+	var apiStr1 = $('#apiStr1').val();
+		var strSend = JSON.stringify({apiStr1: apiStr1});
+
+		$.ajax({
+			type: 'POST',
+			url: '../newdatasource',
+			contentType: 'application/json',
+			data: strSend,
+			success: function(result)
+			{
+				if(result !== 'nil'){
+					loadData(result);
+				}
+			}  
+		});
+		
+}
+
+
+	
+</script>
