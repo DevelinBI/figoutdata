@@ -35,6 +35,8 @@ var resolve = require('path').resolve;
 var app = require('express')();
 var host = process.env.HOST || '127.0.0.1';
 var port = process.env.PORT || 3000;
+var path = require('path');
+var publicDir = path.join(__dirname, 'public');
 
 app.set('port', port);
 // Import API Routes
