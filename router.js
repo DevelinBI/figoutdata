@@ -13,7 +13,7 @@ const fetch = require('node-fetch');
   host: "localhost",
   user: "root",
   dateStrings: true,
-  password: "Black@Red911"
+  password: ""
 }); 
 
   con.connect(function(err) {
@@ -29,7 +29,7 @@ const fetch = require('node-fetch');
 {
     host: 'fodata.mysql.database.azure.com',
     user: 'fodata@fodata',
-    password: 'Black@Red911',
+    password: '',
     database: 'fodata',
     port: 3306,
     ssl: true
