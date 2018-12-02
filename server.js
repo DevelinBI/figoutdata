@@ -11,12 +11,11 @@ var path = require('path');
 
 
 //---------------  set the server to listen
-//app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, '')));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());  
 
-//var publicDir = path.join(__dirname, 'public'); 
+var publicDir = path.join(__dirname, 'public'); 
 
 //var responses = require("./router.js");
 //app.use('/', responses);
