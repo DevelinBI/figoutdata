@@ -1,0 +1,82 @@
+body, html{
+    min-height:100%;
+    min-width:100%;
+}
+
+.container{
+	max-width: 1200px;
+	width:100%;
+	margin:0 auto;
+	-webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.container-datasources{
+	width:100%;
+	margin:0 auto;
+}
+.new-sources{
+	
+}
+.sources{
+	width:100%;
+	margin:0 auto;
+}
+.clear{
+	clear:both;
+}
+.banner-row{
+	width: 100%;
+	margin: 0 auto;
+	background:#ccc;
+}
+
+h1 {
+	font:24px/30px 'Varela Round', sans-serif;
+	font-size: 24px;
+	color: #5b5b5b;
+	text-align:center;
+}
+h2 {
+	font:20px/24px 'Varela Round', sans-serif;
+	color: #5b5b5b;
+	text-align:left;
+}
+p{
+	font:16px/22px 'Varela Round', sans-serif;
+}
+
+}
+.btn-search{
+	font-size: 0;
+	width:30px;
+	height:15px;
+	border: 1px solid #000;
+    border-radius: 8px;
+	background: #ccc;
+	display: inline-block;
+	margin-right:20px;
+	margin-left:5px;
+}
+table.#tbl-sources{
+	width:100%;
+	margin:0 auto;
+	font-size: 8px;
+}
+
+td.lbl-source{
+	width: 100px;
+	background: #ccc;
+}
+td.lbl-title{
+	width: 100px;
+}
+td.lbl-description{
+	width: 800px;
+}
+td.lbl-url{
+	width: 100px;
+}
+td.lbl-sourcetype{
+	width: 100px;
+}
