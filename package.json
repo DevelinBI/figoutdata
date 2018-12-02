@@ -1,7 +1,7 @@
 {
   "name": "figoutdata",
   "version": "0.0.0",
-  "private": false,
+  "private": true,
   "scripts": {
     "start": "node server.js"
   },
@@ -12,5 +12,6 @@
     "express": "^4.16.4",
     "nuxt": "^2.3.4",
     "path": "^0.12.7"
-  }
+  },
+  
 }
