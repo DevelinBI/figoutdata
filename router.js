@@ -10,7 +10,7 @@ const fetch = require('node-fetch');
 
 
 //=====  LOCAL CONNECTION NO POOL  =========
- /* var con = mysql.createConnection({
+  var con = mysql.createConnection({
   host: "localhost",
   user: "root",
   dateStrings: true,
@@ -22,11 +22,11 @@ const fetch = require('node-fetch');
   else {
 	console.log("Connected!");
   }
-});      */
+});      
 
 
 //=====  CLOUD CONNECTION NO POOL =========
-var con = mysql.createConnection({host: "fodata.mysql.database.azure.com", user: "fodata@fodata", password: 'Black@Red911', database: 'fodata', port: 3306});
+//var con = mysql.createConnection({host: "fodata.mysql.database.azure.com", user: "fodata@fodata", password: 'Black@Red911', database: 'fodata', port: 3306});
 
 //-------------- 1.  Import Data.
 
@@ -55,37 +55,46 @@ var con = mysql.createConnection({host: "fodata.mysql.database.azure.com", user:
 	request(options, function(err, res, body) {  
 		
 		var arrBody = JSON.parse(body);		
-		var arrRoutes = arrBody.routes[0].instructions		
-		var arrHeader = ['pcode_start','pcode_end'];
 		
-		for (key in arrRoutes[0]) {											
-			arrHeader.push(key);
-		}
+
+		var arrRoutes;		
+		try {
+			arrRoutes = arrBody.routes[0].instructions;		
 		
-		arrRoutes = convertToArray(arrHeader, arrRoutes, pcode_start, pcode_end );
-		
-		var sqlDel = "DELETE FROM " + db + "." + tbl + " WHERE pcode_start = '" + pcode_start + "' AND pcode_end = '" + pcode_end + "'";
-						
-		con.query(sqlDel, function (err, results) {							
-			if(err)	{
-				console.log('Error deleting data: ' + err);
-					}
-			else 	{			
-				
-					var sqlIns = "INSERT INTO " + db + "." + tbl + "(" + arrHeader + ")  VALUES ?";
+			var arrHeader = ['pcode_start','pcode_end'];
+			
+			for (key in arrRoutes[0]) {											
+				arrHeader.push(key);
+			}
+			
+			arrRoutes = convertToArray(arrHeader, arrRoutes, pcode_start, pcode_end );
+			
+			var sqlDel = "DELETE FROM " + db + "." + tbl + " WHERE pcode_start = '" + pcode_start + "' AND pcode_end = '" + pcode_end + "'";
 							
-					con.query(sqlIns, [arrRoutes], function (err, results) {							
-						if(err){console.log('Error inserting data: ' + err);}
-						else {console.log('Data inserted');}
-					});				
-				
-					}
-		}); 
-		
-		resp.writeHead(200, {"Content-Type": "text/plain"});
-		resp.end(JSON.stringify(arrBody.routes[0].instructions));
-		
-		//console.log(JSON.stringify(arrRoutes));
+			con.query(sqlDel, function (err, results) {							
+				if(err)	{
+					console.log('Error deleting data: ' + err);
+						}
+				else 	{			
+					
+						var sqlIns = "INSERT INTO " + db + "." + tbl + "(" + arrHeader + ")  VALUES ?";
+								
+						con.query(sqlIns, [arrRoutes], function (err, results) {							
+							if(err){console.log('Error inserting data: ' + err);}
+							else {console.log('Data inserted');}
+						});				
+					
+						}
+			}); 
+			
+			resp.writeHead(200, {"Content-Type": "text/plain"});
+			resp.end(JSON.stringify(arrBody.routes[0].instructions));
+			
+			}
+		catch(err) {
+			resp.writeHead(200, {"Content-Type": "text/plain"});
+			resp.end('nil');
+		}
 	});
 
 
