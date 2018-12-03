@@ -10,7 +10,7 @@ const fetch = require('node-fetch');
 
 
 //=====  LOCAL CONNECTION NO POOL  =========
- /* var con = mysql.createConnection({
+ /*  var con = mysql.createConnection({
   host: "localhost",
   user: "root",
   dateStrings: true,
@@ -22,11 +22,11 @@ const fetch = require('node-fetch');
   else {
 	console.log("Connected!");
   }
-});     */
+});    */ 
 
 
 //=====  CLOUD CONNECTION NO POOL =========
-   var config =
+var config =
 {
     host: 'fodata.mysql.database.azure.com',
     user: 'fodata@fodata',
@@ -34,7 +34,7 @@ const fetch = require('node-fetch');
     database: 'fodata',
     port: 3306,
     ssl: true
-};  
+};   
 
  const con = new mysql.createConnection(config); 
 //=========================================
