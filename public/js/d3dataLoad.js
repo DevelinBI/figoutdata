@@ -3,11 +3,10 @@
 //==============  Loads the list of API connections within the index page
 function loadData(data){
 
-	var data = data.replace(/'/gi, '');
-	console.log(data);
+console.log(data);
 	var data = JSON.parse(data);	
 		
-	var columns = ['source', 'title', 'description', 'url', 'source type'];
+	var columns = ['text', 'distance', 'duration'];
 
 	d3.select("#tbl-sources").remove();
 	var table = d3.select('#sources').append('table').attr("id","tbl-sources");
@@ -26,11 +25,7 @@ function loadData(data){
 		})
 	.attr('class', function (column) 
 		{
-			if(column == 'source'){return 'th-source';}
-			else if(column == 'title'){return 'th-title';}
-			else if(column == 'description'){return 'th-description';}
-			else if(column == 'url'){return 'th-url';}
-			else if(column == 'source type'){return 'th-sourcetype';}	
+			return 'th-source';	
 		});
 
 	// create a row for each object in the data
@@ -42,14 +37,9 @@ function loadData(data){
 	// create a cell in each row for each column
 	var cells = rows.selectAll('td')
 		  .data(function (row) {
-		    return columns.map(function (column) {
-		      
-			  if(column == 'source'){var columnOrig = 'site' }
-			  else if(column == 'description'){var columnOrig = 'text' }
-			  else if(column == 'source type'){var columnOrig = 'site_type' }
-			  else {columnOrig = column}
-			  
-			  return {column: column, value: row[columnOrig]};
+		    return columns.map(function (column) {	      
+			  	console.log(row[column]);	  
+			  return {column: column, value: row[column]};
 		    });
 		  })
 	.enter()
@@ -61,26 +51,11 @@ function loadData(data){
 			
 		
 		})
-	.attr('id', function (d) 
-		{ 			
-	
-		})
-	
-	//Set the classes for each column
 	.attr('class', function (d) 
 		{							
 						
-			if(d.column == 'source'){return 'td-source';}
-			else if(d.column == 'title'){return 'td-title';}
-			else if(d.column == 'description'){return 'td-description';}
-			else if(d.column == 'url'){return 'td-url';}
-			else if(d.column == 'source type'){return 'td-sourcetype';}	 
+			return 'td-source'; 
 	
-		})
-	.on("click", function(d) 
-		{
-			
-				
 		});
 	
 }	

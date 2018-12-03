@@ -16,8 +16,8 @@ app.use(bodyParser.json());
 
 var publicDir = path.join(__dirname, 'public'); 
 
-//var responses = require("./router.js");
-//app.use('/', responses);
+var responses = require("./router.js");
+app.use('/', responses);
 
 app.listen(port, (err) => {
   if (err) {
