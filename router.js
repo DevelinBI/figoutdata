@@ -2,7 +2,7 @@
 const express = require('express'),
 router = express.Router();
 
-const mysql = require('mysql2'); 
+//const mysql = require('mysql2'); 
 const fs = require('fs');
 
 const request = require("request");
@@ -36,7 +36,7 @@ var config =
     ssl: true
 };   
 
- const con = new mysql.createConnection(config); 
+ //const con = new mysql.createConnection(config); 
 //=========================================
 
 
@@ -83,10 +83,10 @@ var config =
 		
 		var sqlIns = "INSERT INTO " + db + "." + tbl + "(" + arrHeader + ")  VALUES ?";
 						
-		con.query(sqlIns, [arrRoutes], function (err, results) {							
+		/* con.query(sqlIns, [arrRoutes], function (err, results) {							
 			if(err){console.log('Error inserting data: ' + err);}
 			else {console.log('Data inserted');}
-		});
+		}); */
 		
 		resp.writeHead(200, {"Content-Type": "text/plain"});
 		resp.end(JSON.stringify(arrBody.routes[0].instructions));
