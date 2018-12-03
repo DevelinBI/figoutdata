@@ -12,18 +12,21 @@
 <div class='container'>
 
 	<div class='banner-row'>
-		<h1>Data source control</h1>
+		<h1>Travel data</h1>
 	</div>
 
 	<div class = 'container-datasources'>
 		<div class = 'new-sources'>
-			<h2>Please enter search terms.</h2>
+			<h2>Please enter post codes.</h2>
 			<form>				
 				<div class='input'>
-					<p class='input-label'>Data source API</p>
+					<p class='input-label'>Postcode at start</p>
 					<input type="text" id="apiStr1" name="apiStr1">
 				</div>
-			</form> 
+				<div class='input'>
+					<p class='input-label'>Postcode at end</p>
+					<input type="text" id="apiStr2" name="apiStr2">
+				</div>			</form> 
 			<button class='btn-search' onclick='importData()'>Import</button>
 		</div>
 		<div id='sources' class = 'sources'>
@@ -44,20 +47,21 @@
 <script>
 function importData() {
 	var apiStr1 = $('#apiStr1').val();
-		var strSend = JSON.stringify({apiStr1: apiStr1});
+	var apiStr2 = $('#apiStr2').val();
+	var strSend = JSON.stringify({apiStr1: apiStr1, apiStr2: apiStr2});
 
-		$.ajax({
-			type: 'POST',
-			url: '../newdatasource',
-			contentType: 'application/json',
-			data: strSend,
-			success: function(result)
-			{
-				if(result !== 'nil'){
-					loadData(result);
-				}
-			}  
-		});
+	$.ajax({
+		type: 'POST',
+		url: '../newdatasource',
+		contentType: 'application/json',
+		data: strSend,
+		success: function(result)
+		{
+			if(result !== 'nil'){
+				loadData(result);
+			}
+		}  
+	});
 		
 }
 

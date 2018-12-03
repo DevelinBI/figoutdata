@@ -10,7 +10,7 @@ const fetch = require('node-fetch');
 
 
 //=====  LOCAL CONNECTION NO POOL  =========
- /*  var con = mysql.createConnection({
+ var con = mysql.createConnection({
   host: "localhost",
   user: "root",
   dateStrings: true,
@@ -22,24 +22,11 @@ const fetch = require('node-fetch');
   else {
 	console.log("Connected!");
   }
-});    */ 
+});     
 
 
 //=====  CLOUD CONNECTION NO POOL =========
-/* var config =
-{
-    host: 'fodata.mysql.database.azure.com',
-    user: 'fodata@fodata',
-    password: 'Black@Red911',
-    database: 'fodata',
-    port: 3306,
-    ssl: true
-};    */
-
- //const con = new mysql.createConnection(config); 
-//=========================================
-//var con = mysql.createConnection({host: "fodata.mysql.database.azure.com", user: "fodata@fodata", password: 'Black@Red911', database: 'fodata', port: 3306, ssl:{ca:fs.readFileSync({ca-cert filename})}});
-var con = mysql.createConnection({host: "fodata.mysql.database.azure.com", user: "fodata@fodata", password: 'Black@Red911', database: 'fodata', port: 3306});
+//var con = mysql.createConnection({host: "fodata.mysql.database.azure.com", user: "fodata@fodata", password: 'Black@Red911', database: 'fodata', port: 3306});
 
 //-------------- 1.  Import Data.
 
@@ -48,11 +35,13 @@ var con = mysql.createConnection({host: "fodata.mysql.database.azure.com", user:
 	var db = 'fodata';
 	var tbl = 'routes';
 	
-	var input = req.body;	
-	console.log('New data request: ' + JSON.stringify(input)); 
+	var input = req.body;
+	var pcode_start	= input['apiStr1'].toLowerCase();
+	var pcode_end	= input['apiStr2'].toLowerCase();
+	console.log('1: ' + pcode_start + ' : ' + pcode_end); 
 	
-	var pcode_start = 'EC2A4JE'
-	var pcode_end = 'MK111HX'
+	//var pcode_start = 'EC2A4JE'
+	//var pcode_end = 'MK111HX'
 	
 	// delete the original post code pairing 
 	var query_del = "DELETE FROM " + db + "." + tbl + " WHERE pcode_start = " + pcode_start + " AND pcode_end = " + pcode_end;
@@ -62,7 +51,7 @@ var con = mysql.createConnection({host: "fodata.mysql.database.azure.com", user:
 	var apiKey = 'e4930602757eb3f3d4911eeb92b6b9cd';
 	
 	const options = { 
-		url: 'https://transportapi.com/v3/uk/car/journey/from/postcode:EC2A4JE/to/postcode:mk111hx.json?app_id=' + appId + '&app_key=' + apiKey ,
+		url: 'https://transportapi.com/v3/uk/car/journey/from/postcode:' + pcode_start + '/to/postcode:' + pcode_end + '.json?app_id=' + appId + '&app_key=' + apiKey ,
 		method: 'GET',
 		headers: {
 			'Accept': 'application/json',
@@ -82,11 +71,22 @@ var con = mysql.createConnection({host: "fodata.mysql.database.azure.com", user:
 		
 		arrRoutes = convertToArray(arrHeader, arrRoutes, pcode_start, pcode_end );
 		
-		var sqlIns = "INSERT INTO " + db + "." + tbl + "(" + arrHeader + ")  VALUES ?";
+		var sqlDel = "DELETE FROM " + db + "." + tbl + " WHERE pcode_start = '" + pcode_start + "' AND pcode_end = '" + pcode_end + "'";
 						
-		con.query(sqlIns, [arrRoutes], function (err, results) {							
-			if(err){console.log('Error inserting data: ' + err);}
-			else {console.log('Data inserted');}
+		con.query(sqlDel, function (err, results) {							
+			if(err)	{
+				console.log('Error deleting data: ' + err);
+					}
+			else 	{			
+				
+					var sqlIns = "INSERT INTO " + db + "." + tbl + "(" + arrHeader + ")  VALUES ?";
+							
+					con.query(sqlIns, [arrRoutes], function (err, results) {							
+						if(err){console.log('Error inserting data: ' + err);}
+						else {console.log('Data inserted');}
+					});				
+				
+					}
 		}); 
 		
 		resp.writeHead(200, {"Content-Type": "text/plain"});

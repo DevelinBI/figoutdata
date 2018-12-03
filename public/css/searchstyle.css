@@ -85,14 +85,29 @@ tr:nth-child(2n){
 	background: #eee;
 }
 
-#tbl-sources td.td-source{
-	width: 8%;
+#tbl-sources td.td-text{
+	width: 40%;
+	text-align: left;
 }
-#tbl-sources td.td-title{
+#tbl-sources td.td-distance{
 	width: 8%;
+	text-align: center;
 }
-#tbl-sources td.td-description{		
-	width: 60%;	
+#tbl-sources td.td-duration{		
+	width: 8%;
+	text-align: center;	
+}
+#tbl-sources th.th-text{
+	width: 40%;
+	text-align: left;
+}
+#tbl-sources th.th-distance{
+	width: 8%;
+	text-align: center;
+}
+#tbl-sources th.th-duration{		
+	width: 8%;
+	text-align: center;	
 }
 #tbl-sources td.td-url{
 	width: 8%;
@@ -102,7 +117,7 @@ tr:nth-child(2n){
 	width: 8%;
 } 
 #tbl-sources th.th-source{
-	width: 8%;
+	width: 20%;
 }
 #tbl-sources th.th-title{
 	width: 8%;

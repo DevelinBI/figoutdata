@@ -3,7 +3,7 @@
 //==============  Loads the list of API connections within the index page
 function loadData(data){
 
-console.log(data);
+
 	var data = JSON.parse(data);	
 		
 	var columns = ['text', 'distance', 'duration'];
@@ -20,12 +20,14 @@ console.log(data);
 	.append('th')
 	.text(function (column) 
 		{ 
-			return column;
-			
+			return column;			
 		})
 	.attr('class', function (column) 
 		{
-			return 'th-source';	
+			console.log(column);
+			if(column == 'text'){return 'th-text'; }
+			else if(column == 'distance'){return 'th-distance'; }
+			else if(column == 'duration'){return 'th-duration'; }
 		});
 
 	// create a row for each object in the data
@@ -37,25 +39,20 @@ console.log(data);
 	// create a cell in each row for each column
 	var cells = rows.selectAll('td')
 		  .data(function (row) {
-		    return columns.map(function (column) {	      
-			  	console.log(row[column]);	  
-			  return {column: column, value: row[column]};
+				return columns.map(function (column) {	       
+				return {column: column, value: row[column]};
 		    });
 		  })
 	.enter()
 	.append('td')
 	.text(function (d) { 
-		
-
-				return d.value; 
-			
-		
+				return d.value;		
 		})
-	.attr('class', function (d) 
-		{							
-						
-			return 'td-source'; 
-	
+	.attr('class', function (column) 
+		{						
+			if(column['column'] == 'text'){return 'td-text'; }
+			else if(column['column'] == 'distance'){return 'td-distance'; }
+			else if(column['column'] == 'duration'){return 'td-duration'; }
 		});
 	
 }	
