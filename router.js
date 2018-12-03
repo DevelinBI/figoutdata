@@ -10,7 +10,7 @@ const fetch = require('node-fetch');
 
 
 //=====  LOCAL CONNECTION NO POOL  =========
-  var con = mysql.createConnection({
+  /* var con = mysql.createConnection({
   host: "localhost",
   user: "root",
   dateStrings: true,
@@ -22,11 +22,11 @@ const fetch = require('node-fetch');
   else {
 	console.log("Connected!");
   }
-});      
+});       */
 
 
 //=====  CLOUD CONNECTION NO POOL =========
-//var con = mysql.createConnection({host: "fodata.mysql.database.azure.com", user: "fodata@fodata", password: 'Black@Red911', database: 'fodata', port: 3306});
+var con = mysql.createConnection({host: "fodata.mysql.database.azure.com", user: "fodata@fodata", password: 'Black@Red911', database: 'fodata', port: 3306});
 
 //-------------- 1.  Import Data.
 
@@ -96,11 +96,6 @@ const fetch = require('node-fetch');
 			resp.end('nil');
 		}
 	});
-
-
-
-							
-	
 });
 
 
