@@ -38,7 +38,8 @@ const fetch = require('node-fetch');
 
  //const con = new mysql.createConnection(config); 
 //=========================================
-var con = mysql.createConnection({host: "fodata.mysql.database.azure.com", user: "fodata@fodata", password: 'Black@Red911', database: 'fodata', port: 3306, ssl:{ca:fs.readFileSync({ca-cert filename})}});
+//var con = mysql.createConnection({host: "fodata.mysql.database.azure.com", user: "fodata@fodata", password: 'Black@Red911', database: 'fodata', port: 3306, ssl:{ca:fs.readFileSync({ca-cert filename})}});
+var con = mysql.createConnection({host: "fodata.mysql.database.azure.com", user: "fodata@fodata", password: 'Black@Red911', database: 'fodata', port: 3306});
 
 //-------------- 1.  Import Data.
 
