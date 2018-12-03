@@ -84,10 +84,10 @@ var con = mysql.createConnection({host: "fodata.mysql.database.azure.com", user:
 		
 		var sqlIns = "INSERT INTO " + db + "." + tbl + "(" + arrHeader + ")  VALUES ?";
 						
-		/* con.query(sqlIns, [arrRoutes], function (err, results) {							
+		con.query(sqlIns, [arrRoutes], function (err, results) {							
 			if(err){console.log('Error inserting data: ' + err);}
 			else {console.log('Data inserted');}
-		}); */
+		}); 
 		
 		resp.writeHead(200, {"Content-Type": "text/plain"});
 		resp.end(JSON.stringify(arrBody.routes[0].instructions));
