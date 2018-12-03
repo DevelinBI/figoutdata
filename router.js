@@ -2,7 +2,7 @@
 const express = require('express'),
 router = express.Router();
 
-//const mysql = require('mysql2'); 
+const mysql = require('mysql2'); 
 const fs = require('fs');
 
 const request = require("request");
@@ -26,7 +26,7 @@ const fetch = require('node-fetch');
 
 
 //=====  CLOUD CONNECTION NO POOL =========
-var config =
+/* var config =
 {
     host: 'fodata.mysql.database.azure.com',
     user: 'fodata@fodata',
@@ -34,11 +34,11 @@ var config =
     database: 'fodata',
     port: 3306,
     ssl: true
-};   
+};    */
 
  //const con = new mysql.createConnection(config); 
 //=========================================
-
+var con = mysql.createConnection({host: "fodata.mysql.database.azure.com", user: "fodata@fodata", password: 'Black@Red911', database: 'fodata', port: 3306, ssl:{ca:fs.readFileSync({ca-cert filename})}});
 
 //-------------- 1.  Import Data.
 
