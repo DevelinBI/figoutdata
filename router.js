@@ -10,7 +10,7 @@ const fetch = require('node-fetch');
 
 
 //=====  LOCAL CONNECTION NO POOL  =========
- var con = mysql.createConnection({
+ /* var con = mysql.createConnection({
   host: "localhost",
   user: "root",
   dateStrings: true,
@@ -22,11 +22,11 @@ const fetch = require('node-fetch');
   else {
 	console.log("Connected!");
   }
-});     
+});      */
 
 
 //=====  CLOUD CONNECTION NO POOL =========
-//var con = mysql.createConnection({host: "fodata.mysql.database.azure.com", user: "fodata@fodata", password: 'Black@Red911', database: 'fodata', port: 3306});
+var con = mysql.createConnection({host: "fodata.mysql.database.azure.com", user: "fodata@fodata", password: 'Black@Red911', database: 'fodata', port: 3306});
 
 //-------------- 1.  Import Data.
 
@@ -39,13 +39,6 @@ const fetch = require('node-fetch');
 	var pcode_start	= input['apiStr1'].toLowerCase();
 	var pcode_end	= input['apiStr2'].toLowerCase();
 	console.log('1: ' + pcode_start + ' : ' + pcode_end); 
-	
-	//var pcode_start = 'EC2A4JE'
-	//var pcode_end = 'MK111HX'
-	
-	// delete the original post code pairing 
-	var query_del = "DELETE FROM " + db + "." + tbl + " WHERE pcode_start = " + pcode_start + " AND pcode_end = " + pcode_end;
-	
 
 	var appId = 'cad1e4b6';
 	var apiKey = 'e4930602757eb3f3d4911eeb92b6b9cd';
