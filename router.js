@@ -14,7 +14,7 @@ const fetch = require('node-fetch');
   host: "localhost",
   user: "root",
   dateStrings: true,
-  password: "Black@Red911"
+  password: ""
 }); 
 
   con.connect(function(err) {
@@ -26,7 +26,7 @@ const fetch = require('node-fetch');
 
 
 //=====  CLOUD CONNECTION NO POOL =========
-var con = mysql.createConnection({host: "fodata.mysql.database.azure.com", user: "fodata@fodata", password: 'Black@Red911', database: 'fodata', port: 3306});
+var con = mysql.createConnection({host: "fodata.mysql.database.azure.com", user: "fodata@fodata", password: '', database: 'fodata', port: 3306});
 
 //-------------- 1.  Import Data.
 
